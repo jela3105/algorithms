@@ -33,3 +33,13 @@
 
 # Inputs
 *.in
+
+#CMake
+ALL_BUILD.vcxproj
+ALL_BUILD.vcxproj.filters
+CMakeCache.txt
+CMakeFiles/
+Tutorial.sln
+ZERO_CHECK.vcxproj
+ZERO_CHECK.vcxproj.filters
+cmake_install.cmake
