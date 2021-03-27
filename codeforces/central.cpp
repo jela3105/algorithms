@@ -1,59 +1,42 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
   int points_length;
-  int super_central = 0;
+  int super_central_points = 0;
   cin >> points_length;
-  int points[points_length][2];
+  auto points = vector<pair<int, int>>(points_length);
 
-  for (int i = 0; i < points_length; i++) {
-    cin >> points[i][0];
-    cin >> points[i][1];
+  for (auto &point : points) {
+    cin >> point.first;
+    cin >> point.second;
   }
 
-  for (int i = 0; i < points_length; i++) {
-    bool less = false;
-    bool higher = false;
-    for (int j = 0; j < points_length; j++) {
-      if (points[i][0] == points[j][0]) {
-        if (points[i][1] != points[j][1]) {
-          if (points[i][1] > points[j][1]) {
-            less = true;
-          } else {
-            higher = true;
-          }
-          if (less and higher) {
-            cout << i << j << " same" << endl;
-            for (int iy = 0; iy < points_length; iy++) {
-              bool lessy = false;
-              bool highery = false;
-              for (int jy = 0; jy < points_length; jy++) {
-                if (points[iy][1] == points[jy][1]) {
-                  if (points[iy][0] != points[jy][0]) {
-                    if (points[iy][0] > points[jy][0]) {
-                      lessy = true;
-                    } else {
-                      highery = true;
-                    }
-                    if (lessy and highery) {
-                      cout << iy << jy << " same y" << endl;
-                      super_central++;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+  for (auto taken_point : points) {
+    bool x_lower = false, x_heigher = false, y_lower = false, y_heigher = false;
+    for (auto some_point : points) {
+      if (taken_point.first == some_point.first and
+          taken_point.second != some_point.second) {
+        taken_point.second < some_point.second ? y_heigher = true
+                                               : y_lower = true;
+      }
+      if (taken_point.second == some_point.second and
+          taken_point.first != some_point.first) {
+        taken_point.first < some_point.first ? x_heigher = true
+                                             : x_lower = true;
+      }
+      if (x_lower and x_heigher and y_heigher and y_lower) {
+        x_lower = false;
+        x_heigher = false;
+        y_heigher = false;
+        y_lower = false;
+        super_central_points++;
       }
     }
   }
 
-  /*for (int i = 0; i < points_length; i++) {
-    cout << points[i][0] << " ";
-    cout << points[i][1] << endl;
-  }*/
-  cout << super_central << endl;
+  cout << super_central_points;
+
   return 0;
 }
