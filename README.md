@@ -1,2 +1,2 @@
 # algorithms
-Just algorithms solutions 
+My algorithms solutions of algorithms problems. 
