@@ -36,3 +36,4 @@ int main() {
 
   return 0;
 }
+//http://codeforces.com/problemset/problem/69/A
